@@ -1,0 +1,14 @@
+{
+  "plugin": "Cute Stop",
+  "version": "1.0.0",
+  "name": "500ms Log Stop Start",
+  "author": "Moebytes",
+  "modified": "2026-06-28T19:12:10.956-04:00",
+  "presetFormat": 1,
+  "parameters": {
+    "trigger": "Off",
+    "stopTime": "501ms",
+    "startTime": "501ms",
+    "curve": "logarithmic"
+  }
+}

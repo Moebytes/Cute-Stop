@@ -1,0 +1,14 @@
+{
+  "plugin": "Cute Stop",
+  "version": "1.0.0",
+  "name": "500ms Linear Stop Start",
+  "author": "Moebytes",
+  "modified": "2026-06-28T19:10:46.782-04:00",
+  "presetFormat": 1,
+  "parameters": {
+    "trigger": "Off",
+    "stopTime": "526ms",
+    "startTime": "504ms",
+    "curve": "linear"
+  }
+}

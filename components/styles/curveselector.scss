@@ -1,0 +1,14 @@
+.curve-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2rem solid var(--mainColor);
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.3rem;
+}
+
+.curve {
+    width: auto;
+    height: 3.3rem;
+    color: var(--mainColor);
+}

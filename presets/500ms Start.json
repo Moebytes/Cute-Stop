@@ -1,0 +1,14 @@
+{
+  "plugin": "Cute Stop",
+  "version": "1.0.0",
+  "name": "500ms Start",
+  "author": "Moebytes",
+  "modified": "2026-06-28T19:15:06.562-04:00",
+  "presetFormat": 1,
+  "parameters": {
+    "trigger": "Off",
+    "stopTime": "0ms",
+    "startTime": "527ms",
+    "curve": "exponential"
+  }
+}

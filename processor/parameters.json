@@ -1,0 +1,6 @@
+{
+    "trigger": {"id": "trigger", "version": 1},
+    "stopTime": {"id": "stopTime", "version": 1},
+    "startTime": {"id": "startTime", "version": 1},
+    "curve": {"id": "curve", "version": 1}
+}
