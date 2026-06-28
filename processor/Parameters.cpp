@@ -82,7 +82,7 @@ auto Parameters::createParameterLayout() -> AudioProcessorValueTreeState::Parame
     ));
 
     layout.add(std::make_unique<AudioParameterChoice>(
-        paramIDs.curve, "Pitch LFO Type", StringArray{"exponential", "linear", "logarithmic"}, 0
+        paramIDs.curve, "Curve", StringArray{"exponential", "linear", "logarithmic"}, 0
     ));
 
     return layout;
