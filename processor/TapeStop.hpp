@@ -122,8 +122,21 @@ public:
     auto processSample(float inL, float inR, float& outL, float& outR) -> void {
         this->calculateSpeed();
 
+        if (!stopping && !starting && speed >= 0.9999f) {
+            outL = inL;
+            outR = inR;
+
+            this->tapeBuffer.setSample(0, writePos, inL);
+            this->tapeBuffer.setSample(1, writePos, inR);
+
+            this->writePos = (this->writePos + 1) % tapeBufferSize;
+            this->readPos = static_cast<float>(this->writePos);
+
+            return;
+        }
+
         this->tapeBuffer.setSample(0, this->writePos, inL);
-        this->tapeBuffer.setSample(1, writePos, inR);
+        this->tapeBuffer.setSample(1, this->writePos, inR);
 
         int pos1 = static_cast<int>(this->readPos);
         int pos2 = (pos1 + 1) % this->tapeBufferSize;
