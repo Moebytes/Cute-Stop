@@ -14,7 +14,7 @@ public:
   auto prepareToPlay(double sampleRate, int samplesPerBlock) -> void override;
   auto releaseResources() -> void override;
   auto processBlock(AudioBuffer<float>&, MidiBuffer&) -> void override;
-  auto getHostInfo() noexcept -> std::tuple<double, double, TimeSignature>;
+  auto getHostInfo() noexcept -> std::tuple<double, double, TimeSignature, bool>;
 
   auto isBusesLayoutSupported (const BusesLayout& layouts) const -> bool override;
   auto createEditor() -> AudioProcessorEditor* override;
@@ -44,6 +44,7 @@ public:
 
 private:
   TapeStop tapeStop;
+  bool wasPlaying = false;
   double lastPPQ = 0.0;
 
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Processor)

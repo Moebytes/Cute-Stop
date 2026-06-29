@@ -11,12 +11,11 @@ public:
         this->tapeBufferSize = static_cast<int>(sampleRate * maxLength);
 
         this->tapeBuffer.setSize(2, tapeBufferSize);
-        this->tapeBuffer.clear();
-
         this->reset();
     }
 
     auto reset() -> void {
+        this->tapeBuffer.clear();
         this->speed = 1.0f;
 
         this->writePos = 0;
@@ -126,8 +125,8 @@ public:
             outL = inL;
             outR = inR;
 
-            this->tapeBuffer.setSample(0, writePos, inL);
-            this->tapeBuffer.setSample(1, writePos, inR);
+            this->tapeBuffer.setSample(0, this->writePos, inL);
+            this->tapeBuffer.setSample(1, this->writePos, inR);
 
             this->writePos = (this->writePos + 1) % tapeBufferSize;
             this->readPos = static_cast<float>(this->writePos);

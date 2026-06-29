@@ -71,19 +71,21 @@ auto Processor::prepareToPlay(double sampleRate, int samplesPerBlock) -> void {
 
 auto Processor::releaseResources() -> void {}
 
-auto Processor::getHostInfo() noexcept -> std::tuple<double, double, TimeSignature> {
+auto Processor::getHostInfo() noexcept -> std::tuple<double, double, TimeSignature, bool> {
     double bpm = 150.0;
     double ppq = 0.0;
     TimeSignature timeSignature{4, 4};
+    bool isPlaying = false;
 
     if (auto* playhead = this->getPlayHead()) {
         auto info = playhead->getPosition().orFallback(AudioPlayHead::PositionInfo{});
         bpm = info.getBpm().orFallback(150.0);
         ppq = info.getPpqPosition().orFallback(0.0);
         timeSignature = info.getTimeSignature().orFallback(TimeSignature{4, 4});
+        isPlaying = info.getIsPlaying();
     }
 
-    return {bpm, ppq, timeSignature};
+    return {bpm, ppq, timeSignature, isPlaying};
 }
 
 auto Processor::processBlock(AudioBuffer<float>& buffer, [[maybe_unused]] MidiBuffer& midiMessages) -> void {
@@ -98,12 +100,22 @@ auto Processor::processBlock(AudioBuffer<float>& buffer, [[maybe_unused]] MidiBu
     float* outputL = mainOutput.getWritePointer(0);
     float* outputR = mainOutput.getNumChannels() > 1 ? mainOutput.getWritePointer(1) : outputL;
 
-    auto [bpm, ppq, timeSignature] = this->getHostInfo();
+    auto [bpm, ppq, timeSignature, isPlaying] = this->getHostInfo();
 
-    if (ppq < this->lastPPQ) {
+    if (!this->wasPlaying && isPlaying) {
+        this->tapeStop.reset();
+    }
+
+    if (this->wasPlaying && !isPlaying) {
+        this->tapeStop.reset();
+    }
+    this->wasPlaying = isPlaying;
+
+    if (std::abs(ppq - this->lastPPQ) > 2.0) {
         this->tapeStop.reset();
     }
     this->lastPPQ = ppq;
+
 
     this->parameters.setHostInfo(bpm, ppq, timeSignature);
     this->parameters.blockUpdate();
