@@ -10,12 +10,18 @@ Cute Stop is a VST plugin for tape stop effects.
 - Start Time - the start time in ms
 - Curve - Choose from exponential, linear, or logarithmic curves
 
-This should work well with DAW playback since it resets when you rewind the playhead. I 
-have used plugins that try to start again from "start time" which is incorrect. 
+This should work well with DAW playback since it resets whenever you rewind the playhead. Most 
+plugins that I used seem to keep the effect active, causing silent audio. 
 
 ### Design
 
 Our design is available here: https://www.figma.com/design/jOlYQw7VuwKc2q57O1ALn6/Cute-Stop
+
+### Purchase
+
+<a href="https://moebytes.gumroad.com/l/cute-stop" target="_blank">
+  <img src="assets/gumroad.svg" style="height:60px;"/>
+</a>
 
 ### See Also
 

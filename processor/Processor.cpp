@@ -116,7 +116,6 @@ auto Processor::processBlock(AudioBuffer<float>& buffer, [[maybe_unused]] MidiBu
     }
     this->lastPPQ = ppq;
 
-
     this->parameters.setHostInfo(bpm, ppq, timeSignature);
     this->parameters.blockUpdate();
 
