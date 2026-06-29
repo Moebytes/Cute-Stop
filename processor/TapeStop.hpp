@@ -51,15 +51,15 @@ public:
         if (trigger && !this->lastTrigger) {
             this->stopping = true;
             this->starting = false;
-
             this->stopProgress = 0.0f;
-            this->readPos = static_cast<float>(writePos);
+            this->readPos = static_cast<float>(this->writePos);
         }
 
         if (!trigger && this->lastTrigger) {
             this->starting = true;
             this->stopping = false;
             this->startProgress = 0.0f;
+            this->readPos = static_cast<float>(this->writePos);
         }
 
         this->lastTrigger = trigger;
